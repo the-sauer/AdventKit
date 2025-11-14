@@ -11,6 +11,10 @@ public struct CalendarView<DayView: View>: View {
 
     private let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 4)
 
+    public init(_ contentForDay: @escaping (Int) -> DayView) {
+        self.contentForDay = contentForDay
+    }
+
     public var body: some View {
         NavigationStack {
             ScrollView {
@@ -26,5 +30,7 @@ public struct CalendarView<DayView: View>: View {
 }
 
 #Preview {
-    CalendarView(contentForDay: { day in Text("Hello its day \(day)")})
+    CalendarView { day in
+        Text("Hello its day \(day)")
+    }
 }

@@ -35,14 +35,15 @@ public struct SnowView: View {
 
     let baseVelocity: Vector3D
 
-    init(intensity: Double, baseVelocity: Vector3D = .init(x: 0, y: 0.002, z: 0)) {
+    public init(intensity: Double) {
         let clampedIntensity: Double = max(min(intensity, 1), 0)
-        self.baseVelocity = baseVelocity
+        self.baseVelocity = .init(x: 0, y: 0.002, z: 0)
+        let initialVelocity = baseVelocity
         let totalFlakes = Int(Double(minFlakeCount) + Double(maxFlakeCount - minFlakeCount) * clampedIntensity)
         self.snowflakes = (0..<totalFlakes).map { _ in
             Snowflake(
                 pos: .init(x: .random(in: 0...1), y: .random(in: 0...1), z: .random(in: 0...1)),
-                velocity: baseVelocity
+                velocity: initialVelocity
             )
         }
     }
