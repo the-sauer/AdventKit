@@ -29,7 +29,7 @@ public struct CalendarView<DayView: View, BackgroundView: View>: View {
                 background()
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(1...24, id: \.self) { day in
+                        ForEach((1...24).shuffled(), id: \.self) { day in
                             DoorNavigationLink(day, contentForDay(day))
                                 .disabled(Date.now < firstOfDecember.addingTimeInterval(Double((day - 1) * 24 * 60 * 60)))
                         }
